@@ -49,13 +49,14 @@ namespace Jija
         public void ActOnCollision()
         {
             var collisionObject = GetCollisionObject();
-            if (collisionObject is Wall)
+            switch (collisionObject)
             {
-                Velocity = Size.Empty;
-            }
-            else if (collisionObject is Enemy)
-            {
-                Die();
+                case Wall _:
+                    Velocity = Size.Empty;
+                    break;
+                case Enemy _:
+                    Die();
+                    break;
             }
         }
 
