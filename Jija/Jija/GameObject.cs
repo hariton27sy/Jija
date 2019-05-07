@@ -10,6 +10,7 @@ namespace Jija
     class GameObject
     {
         public static List<GameObject> ObjectsOnMap;
+        private static Size Gravity = Size.Empty;
 
         public Point Position { get; set; }
         public Size Velocity { get; private set; }
@@ -28,7 +29,8 @@ namespace Jija
 
         public void Update()
         {
-            
+            Velocity += Gravity;
+            Position += Velocity;
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Jija
     class Game
     {
         public Player Player;
+
         public Game(string filePath)
         {
             Load_Map(filePath);
