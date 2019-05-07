@@ -14,8 +14,6 @@ namespace Jija
 
         public Player Player;
         public readonly List<GameObject> objects = new List<GameObject>();
-        
-        public bool IsGameOver => Player?.Lifes > 0;
 
         public Game(string filePath)
         {
@@ -32,26 +30,28 @@ namespace Jija
                 foreach (var symbol in line)
                 {
                     var position = new Point(x * ObjectsSize, y * ObjectsSize);
-                    if (symbol == 'p')
+                    switch (symbol)
                     {
-                        Player = new Player(position, 3);
+                        case 'p':
+                            Player = new Player(position);
+                            break;
+                        case 's':
+                            objects.Add(new Sponge(position));
+                            break;
+                        case 'w':
+                            objects.Add(null);
+                            break;
+                        case ' ':
+                            break;
+                        default:
+                            throw new ArgumentException("Unresolved symbol in map declaration");
                     }
-                    else if (symbol == 's')
-                    {
-                        objects.Add(new Sponge(position));
-                    }
-                    else if (symbol == 'w')
-                    {
-                        objects.Add(new Wall(position));
-                    }
-
                     x++;
                 }
-
                 y++;
             }
         }
-        
+
         public void UpdateState()
         {
             Player.Update();
@@ -60,6 +60,5 @@ namespace Jija
                 obj.Update();
             }
         }
-
     }
 }
