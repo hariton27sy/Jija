@@ -31,5 +31,20 @@ namespace Jija
             Velocity += Gravity;
             Position += Velocity;
         }
+
+        public GameObject GetCollisionObject()
+        {
+            var size = new Size(Game.ObjectsSize, Game.ObjectsSize);
+            var thisRect = new Rectangle(Position, size);
+            foreach (var obj in ObjectsOnMap)
+            {
+                var otherRect = new Rectangle(obj.Position, size);
+                if (thisRect.IntersectsWith(otherRect))
+                {
+                    return obj;
+                }
+            }
+            return null;
+        }
     }
 }

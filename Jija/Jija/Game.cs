@@ -10,10 +10,12 @@ namespace Jija
 {
     class Game
     {
-        public static int ObjectsSize = 32;
+        public const int ObjectsSize = 32;
 
         public Player Player;
         public readonly List<GameObject> objects = new List<GameObject>();
+
+        public bool IsGameOver => Player?.Lifes == 0;
 
         public Game(string filePath)
         {
@@ -33,7 +35,7 @@ namespace Jija
                     switch (symbol)
                     {
                         case 'p':
-                            Player = new Player(position);
+                            Player = new Player(position, 3);
                             break;
                         case 's':
                             objects.Add(new Sponge(position));
