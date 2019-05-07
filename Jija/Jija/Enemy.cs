@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jija
 {
-    class Game
+    class Enemy
     {
-        private 
-        public Game()
-        {
-            
-        }
     }
 }
