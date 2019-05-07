@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Jija
 {
-    class Wall : GameObject
+    internal class Wall : GameObject
     {
         public Wall(Point position) : base(position)
         {

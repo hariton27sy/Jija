@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Jija
 {
-    class Game
+    internal class Game
     {
         public const int ObjectsSize = 32;
 

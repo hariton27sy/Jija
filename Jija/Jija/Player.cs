@@ -8,25 +8,19 @@ using System.Threading.Tasks;
 
 namespace Jija
 {
-    class Player : GameObject
+    internal class Player : GameObject
     {
-        public static int MaxSpeed = 32;
-        public static int JumpingVelocity = 48;
+        private const int MaxSpeed = 32;
+        private const int JumpingVelocity = 48;
         public int Health { get; private set; }
         public Point LastCheckpoint { get; set; }
-        public bool IsJumped = false;
+        private bool isJumped;
 
 
         public Player(Point startPosition, int health) : base(startPosition)
         {
             Health = health;
             LastCheckpoint = startPosition;
-        }
-
-        public void Die()
-        {
-            Health--;
-            Position = LastCheckpoint;
         }
 
         public void Left()
@@ -46,11 +40,30 @@ namespace Jija
 
         public void Jump()
         {
-            if (!IsJumped)
+            if (!isJumped)
             {
                 Velocity = new Size(Velocity.Width, JumpingVelocity);
-                IsJumped = true;
+                isJumped = true;
             }
+        }
+
+        public void ActOnCollision()
+        {
+            var collisionObject = GetCollisionObject();
+            if (collisionObject is Wall)
+            {
+                Velocity = Size.Empty;
+            }
+            else if (collisionObject is Enemy)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            Health--;
+            Position = LastCheckpoint;
         }
     }
 }

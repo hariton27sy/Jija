@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Jija
 {
-    class GameForm : Form
+    internal class GameForm : Form
     {
     }
 }
