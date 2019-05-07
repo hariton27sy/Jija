@@ -1,4 +1,4 @@
-﻿namespace Jija
+namespace Jija
 {
     public class Creature
     {
