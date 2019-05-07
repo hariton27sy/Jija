@@ -30,17 +30,17 @@ namespace Jija
                 foreach (var symbol in line)
                 {
                     var position = new Point(x * ObjectsSize, y * ObjectsSize);
-                    if (symbol == 'p')
+                    switch (symbol)
                     {
-                        Player = new Player(position);
-                    }
-                    else if (symbol == 's')
-                    {
-                        objects.Add(new Sponge(position));
-                    }
-                    else if (symbol == 'w')
-                    {
-                        objects.Add(null);
+                        case 'p':
+                            Player = new Player(position);
+                            break;
+                        case 's':
+                            objects.Add(new Sponge(position));
+                            break;
+                        case 'w':
+                            objects.Add(null);
+                            break;
                     }
 
                     x++;
