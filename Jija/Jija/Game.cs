@@ -33,7 +33,7 @@ namespace Jija
                     switch (symbol)
                     {
                         case 'p':
-                            Player = new Player(position);
+                            Player = new Player(position, 3);
                             break;
                         case 's':
                             objects.Add(new Sponge(position));
