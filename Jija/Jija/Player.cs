@@ -9,18 +9,36 @@ namespace Jija
 {
     class Player : GameObject
     {
-        public int Lifes { get; private set; }
-        public Player(Point startPosition, int lifes) : base(startPosition)
+        public int Health { get; private set; }
+        public Point LastCheckpoint { get; set; }
+
+        public Player(Point startPosition, int health) : base(startPosition)
         {
-            Lifes = lifes;
+            Health = health;
+            LastCheckpoint = startPosition;
         }
 
         public void Die()
         {
-            if (Lifes > 1)
+            if (Health > 1)
             {
-                Lifes--;
+                Health--;
+                Restart();
             }
+            else
+            {
+                StopGame();
+            }
+        }
+
+        private void StopGame()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Restart()
+        {
+            Position = LastCheckpoint;
         }
     }
 }
