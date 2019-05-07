@@ -20,24 +20,7 @@ namespace Jija
 
         public void Die()
         {
-            if (Health > 1)
-            {
-                Health--;
-                Restart();
-            }
-            else
-            {
-                StopGame();
-            }
-        }
-
-        private void StopGame()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Restart()
-        {
+            Health--;
             Position = LastCheckpoint;
         }
     }
