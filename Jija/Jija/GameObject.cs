@@ -9,7 +9,7 @@ namespace Jija
 {
     class GameObject
     {
-        public static List<GameObject> ObjectsOnMap;
+        public static List<GameObject> ObjectsOnMap { get; set; }
         private static Size Gravity = Size.Empty;
 
         public Point Position { get; set; }

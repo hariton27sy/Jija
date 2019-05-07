@@ -57,6 +57,5 @@ namespace Jija
                 obj.Update();
             }
         }
-
     }
 }
