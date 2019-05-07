@@ -14,7 +14,6 @@ namespace Jija
         private const int JumpingVelocity = 48;
         public int Health { get; private set; }
         public Point LastCheckpoint { get; set; }
-        private bool isJumped;
 
 
         public Player(Point startPosition, int health) : base(startPosition)
