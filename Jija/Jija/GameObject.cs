@@ -13,7 +13,7 @@ namespace Jija
         private static Size Gravity = Size.Empty;
 
         public Point Position { get; set; }
-        public Size Velocity { get; private set; } = Size.Empty;
+        public Size Velocity { get; protected set; } = Size.Empty;
 
         public GameObject(Point startPosition)
         {
