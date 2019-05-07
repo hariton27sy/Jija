@@ -49,14 +49,14 @@ namespace Jija
             return null;
         }
 
-        public void RepairCollision(GameObject obj)
+        public void RepairWallCollision(Wall wall)
         {
-            var leftCover = obj.Position.X - Position.X;
-            var rightCover = Position.X + Game.ObjectsSize - obj.Position.X;
-            var needingX = Math.Abs(leftCover) < Math.Abs(rightCover) ? leftCover : -rightCover));
+            var leftCover = wall.Position.X - Position.X;
+            var rightCover = Position.X + Game.ObjectsSize - wall.Position.X;
+            var needingX = Math.Abs(leftCover) < Math.Abs(rightCover) ? leftCover : -rightCover;
 
-            var upCover = obj.Position.Y - Position.Y;
-            var downCover = Position.Y + Game.ObjectsSize - obj.Position.Y;
+            var upCover = wall.Position.Y - Position.Y;
+            var downCover = Position.Y + Game.ObjectsSize - wall.Position.Y;
             var needingY = Math.Abs(upCover) < Math.Abs(downCover) ? upCover : -downCover;
 
             Position += Math.Abs(needingX) < Math.Abs(needingY) ? new Size(needingX, 0) : new Size(0, needingY);
