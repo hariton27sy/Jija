@@ -39,10 +39,10 @@ namespace Jija
 
         public void Jump()
         {
-            if (!isJumped)
+            if (!IsJumped)
             {
                 Velocity = new Size(Velocity.Width, JumpingVelocity);
-                isJumped = true;
+                IsJumped = true;
             }
         }
 

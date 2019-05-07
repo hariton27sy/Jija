@@ -11,7 +11,7 @@ namespace Jija
     {
         public static List<GameObject> ObjectsOnMap { get; set; }
         private static Size Gravity = Size.Empty;
-        protected bool isJumped;
+        protected bool IsJumped;
 
         public Point Position { get; set; }
         public Size Velocity { get; protected set; } = Size.Empty;
@@ -62,7 +62,7 @@ namespace Jija
             Position += Math.Abs(needingX) < Math.Abs(needingY) ? new Size(needingX, 0) : new Size(0, needingY);
             if (needingY < 0)
             {
-                isJumped = false;
+                IsJumped = false;
             }
         }
     }
