@@ -13,7 +13,7 @@ namespace Jija
         public static int ObjectsSize = 32;
 
         public Player Player;
-        public List<GameObject> objects = new List<GameObject>();
+        public readonly List<GameObject> objects = new List<GameObject>();
 
         public Game(string filePath)
         {
@@ -41,10 +41,10 @@ namespace Jija
                     {
                         objects.Add(null);
                     }
-                    
+
                     x++;
                 }
-                
+
                 y++;
             }
         }
