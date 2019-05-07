@@ -41,11 +41,13 @@ namespace Jija
                         case 'w':
                             objects.Add(null);
                             break;
+                        case ' ':
+                            break;
+                        default:
+                            throw new ArgumentException("Unresolved symbol in map declaration");
                     }
-
                     x++;
                 }
-
                 y++;
             }
         }
