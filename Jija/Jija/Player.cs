@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Jija
 {
-    class Player
+    class Player : Creature
     {
     }
 }
