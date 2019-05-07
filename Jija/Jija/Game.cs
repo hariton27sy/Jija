@@ -13,7 +13,8 @@ namespace Jija
     {
         public Player Player = new Player();
         public char[,] Map { get; private set; }
-        public Game(string map_filename)
+
+        public Game(string mapFilename)
         {
             
         }
