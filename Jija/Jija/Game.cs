@@ -15,7 +15,7 @@ namespace Jija
         public Player Player;
         public readonly List<GameObject> objects = new List<GameObject>();
 
-        public bool IsGameOver => Player?.Lifes == 0;
+        public bool IsGameOver => Player?.Health == 0;
 
         public Game(string filePath)
         {
