@@ -14,6 +14,8 @@ namespace Jija
 
         public Player Player;
         public readonly List<GameObject> objects = new List<GameObject>();
+        
+        public bool IsGameOver => Player?.Lifes > 0;
 
         public Game(string filePath)
         {
@@ -32,7 +34,7 @@ namespace Jija
                     var position = new Point(x * ObjectsSize, y * ObjectsSize);
                     if (symbol == 'p')
                     {
-                        Player = new Player(position);
+                        Player = new Player(position, 3);
                     }
                     else if (symbol == 's')
                     {
@@ -40,7 +42,7 @@ namespace Jija
                     }
                     else if (symbol == 'w')
                     {
-                        objects.Add(null);
+                        objects.Add(new Wall(position));
                     }
 
                     x++;
@@ -49,7 +51,7 @@ namespace Jija
                 y++;
             }
         }
-
+        
         public void UpdateState()
         {
             Player.Update();
@@ -58,5 +60,6 @@ namespace Jija
                 obj.Update();
             }
         }
+
     }
 }

@@ -9,8 +9,18 @@ namespace Jija
 {
     class Player : GameObject
     {
-        public Player(Point startPosition) : base(startPosition)
+        public int Lifes { get; private set; }
+        public Player(Point startPosition, int lifes) : base(startPosition)
         {
+            Lifes = lifes;
+        }
+
+        public void Die()
+        {
+            if (Lifes > 1)
+            {
+                Lifes--;
+            }
         }
     }
 }
