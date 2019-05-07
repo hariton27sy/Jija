@@ -17,6 +17,7 @@ namespace Jija
 
         public Game(string filePath)
         {
+            GameObject.ObjectsOnMap = objects;
             Load_Map(filePath);
         }
 
