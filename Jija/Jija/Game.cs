@@ -36,6 +36,7 @@ namespace Jija
                     {
                         case 'p':
                             Player = new Player(position, 3);
+                            objects.Add(Player);
                             break;
                         case 's':
                             objects.Add(new Sponge(position));

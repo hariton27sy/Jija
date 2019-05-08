@@ -9,6 +9,7 @@ namespace Jija
 {
     internal class GameObject
     {
+        public static readonly Size ObjectSize = new Size(Game.ObjectsSize, Game.ObjectsSize);
         public static List<GameObject> ObjectsOnMap { get; set; }
         private static Size Gravity = Size.Empty;
         protected bool IsJumped;
@@ -39,7 +40,7 @@ namespace Jija
 
         }
 
-        public GameObject GetCollisionObject()
+        public virtual GameObject GetCollisionObject()
         {
             var size = new Size(Game.ObjectsSize, Game.ObjectsSize);
             var thisRect = new Rectangle(Position, size);

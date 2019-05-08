@@ -16,9 +16,9 @@ namespace Jija
 
     internal class Bullet : GameObject
     {
-        public Bullet(Point startPosition) : base(startPosition)
+        public Bullet(Point startPosition, int direction) : base(startPosition)
         {
-            Velocity = new Size(64, 0);
+            Velocity = new Size(64 * direction, 0);
         }
 
         public override void ActOnCollision()

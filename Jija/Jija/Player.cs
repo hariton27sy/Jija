@@ -12,8 +12,9 @@ namespace Jija
     {
         private const int MaxSpeed = 32;
         private const int JumpingVelocity = 48;
-        public int Health { get; private set; }
+        public int Health { get; set; }
         public Point LastCheckpoint { get; set; }
+        public int Direction;
 
 
         public Player(Point startPosition, int health) : base(startPosition)
@@ -44,6 +45,11 @@ namespace Jija
                 Velocity = new Size(Velocity.Width, JumpingVelocity);
                 IsJumped = true;
             }
+        }
+
+        public void Shoot()
+        {
+            ObjectsOnMap.Add(new Bullet(Direction > -1 ? Position + ObjectSize : Position, Direction));
         }
 
         public override void Update()
