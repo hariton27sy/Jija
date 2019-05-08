@@ -15,12 +15,15 @@ namespace Jija
         public int Health { get; set; }
         public Point LastCheckpoint { get; set; }
         public int Direction;
+        public bool IsSolid;
+        public int Ammunition;
 
 
         public Player(Point startPosition, int health) : base(startPosition)
         {
             Health = health;
             LastCheckpoint = startPosition;
+            Ammunition = 15;
         }
 
         public void Left()
@@ -49,7 +52,11 @@ namespace Jija
 
         public void Shoot()
         {
-            ObjectsOnMap.Add(new Bullet(Direction > -1 ? Position + ObjectSize : Position, Direction));
+            if (Ammunition > 0)
+            {
+                Ammunition--;
+                ObjectsOnMap.Add(new Bullet(Direction > -1 ? Position + ObjectSize : Position, Direction));
+            }
         }
 
         public override void Update()

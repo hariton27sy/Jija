@@ -31,4 +31,13 @@ namespace Jija
             BonusAction = p => p.Health++;
         }
     }
+
+    class AddingAmmunition : Bonus
+    {
+        public int Ammunition = 15;
+        public AddingAmmunition(Point startPosition) : base(startPosition)
+        {
+            BonusAction = p => p.Ammunition += Ammunition;
+        }
+    }
 }
