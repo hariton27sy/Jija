@@ -13,4 +13,24 @@ namespace Jija
         {
         }
     }
+
+    internal class Bullet : GameObject
+    {
+        public Bullet(Point startPosition) : base(startPosition)
+        {
+            Velocity = new Size(64, 0);
+        }
+
+        public override void ActOnCollision()
+        {
+            base.ActOnCollision();
+            var collisionObject = GetCollisionObject();
+
+            if (collisionObject is Enemy)
+            {
+                collisionObject.DestroyObject();
+            }
+            DestroyObject();
+        }
+    }
 }

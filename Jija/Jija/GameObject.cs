@@ -27,10 +27,15 @@ namespace Jija
             ObjectsOnMap.Remove(this);
         }
 
-        public void Update()
+        public virtual void Update()
         {
             Velocity += Gravity;
             Position += Velocity;
+
+        }
+
+        public virtual void ActOnCollision()
+        {
 
         }
 
@@ -49,7 +54,7 @@ namespace Jija
             return null;
         }
 
-        public void RepairWallCollision(Wall wall)
+        public void RepairCollision(GameObject wall)
         {
             var leftCover = wall.Position.X - Position.X;
             var rightCover = Position.X + Game.ObjectsSize - wall.Position.X;

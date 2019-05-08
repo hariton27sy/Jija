@@ -46,6 +46,12 @@ namespace Jija
             }
         }
 
+        public override void Update()
+        {
+            base.Update();
+            ActOnCollision();
+        }
+
         public void ActOnCollision()
         {
             var collisionObject = GetCollisionObject();
@@ -53,6 +59,7 @@ namespace Jija
             {
                 case Wall _:
                     Velocity = Size.Empty;
+                    RepairCollision(collisionObject);
                     break;
                 case Enemy _:
                     Die();
