@@ -17,6 +17,7 @@ namespace Jija
         public int Direction;
         public bool IsSolid;
         public int Ammunition;
+        public bool IsEnd;
 
 
         public Player(Point startPosition, int health) : base(startPosition)

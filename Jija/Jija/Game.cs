@@ -44,7 +44,16 @@ namespace Jija
                         case 'w':
                             objects.Add(null);
                             break;
-                        case ' ':
+                        case 'e':
+                            objects.Add(new End(position));
+                            break;
+                        case 'l':
+                            objects.Add(new AdditingLife(position));
+                            break;
+                        case 'a':
+                            objects.Add(new AddingAmmunition(position));
+                            break;
+                        case '.':
                             break;
                         default:
                             throw new ArgumentException("Unresolved symbol in map declaration");

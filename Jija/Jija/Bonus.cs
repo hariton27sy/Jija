@@ -40,4 +40,11 @@ namespace Jija
             BonusAction = p => p.Ammunition += Ammunition;
         }
     }
+
+    class End : Bonus {
+        public End(Point startPosition) : base(startPosition)
+        {
+            BonusAction = p => p.IsEnd = true;
+        }
+    }
 }
