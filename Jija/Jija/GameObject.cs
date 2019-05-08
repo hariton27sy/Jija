@@ -65,7 +65,8 @@ namespace Jija
             var downCover = Position.Y + Game.ObjectsSize - wall.Position.Y;
             var needingY = Math.Abs(upCover) < Math.Abs(downCover) ? upCover : -downCover;
 
-            Position += Math.Abs(needingX) < Math.Abs(needingY) ? new Size(needingX, 0) : new Size(0, needingY);
+            Position += Math.Abs(needingX) < Math.Abs(needingY) || needingY == 0 
+                ? new Size(needingX, 0) : new Size(0, needingY);
             if (needingY < 0)
             {
                 IsJumped = false;
