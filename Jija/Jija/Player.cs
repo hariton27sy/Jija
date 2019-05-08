@@ -15,9 +15,9 @@ namespace Jija
         public int Health { get; set; }
         public Point LastCheckpoint { get; set; }
         public int Direction;
-        public bool IsSolid;
         public int Ammunition;
         public bool IsEnd;
+        public bool IsLiquid = true;
 
 
         public Player(Point startPosition, int health) : base(startPosition)
@@ -77,6 +77,13 @@ namespace Jija
                     break;
                 case Enemy _:
                     Die();
+                    break;
+                case Lattice _:
+                    if (!IsLiquid)
+                    {
+                        Velocity = Size.Empty;
+                        RepairCollision(collisionObject);
+                    }
                     break;
             }
         }

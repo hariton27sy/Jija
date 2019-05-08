@@ -47,4 +47,12 @@ namespace Jija
             BonusAction = p => p.IsEnd = true;
         }
     }
+
+    class Hardener : Bonus
+    {
+        public Hardener(Point startPosition) : base(startPosition)
+        {
+            BonusAction = p => p.IsLiquid = !p.IsLiquid;
+        }
+    }
 }

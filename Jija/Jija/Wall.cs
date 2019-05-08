@@ -14,6 +14,13 @@ namespace Jija
         }
     }
 
+    internal class Lattice : GameObject
+    {
+        public Lattice(Point startPosition) : base(startPosition)
+        {
+        }
+    }
+
     internal class Bullet : GameObject
     {
         public Bullet(Point startPosition, int direction) : base(startPosition)
