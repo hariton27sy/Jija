@@ -47,7 +47,7 @@ namespace Jija
             foreach (var obj in ObjectsOnMap)
             {
                 var otherRect = new Rectangle(obj.Position, size);
-                if (thisRect.IntersectsWith(otherRect))
+                if (thisRect.IntersectsWith(otherRect) && obj != this)
                 {
                     return obj;
                 }
