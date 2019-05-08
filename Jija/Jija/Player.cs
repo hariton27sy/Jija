@@ -75,7 +75,7 @@ namespace Jija
                     Velocity = Size.Empty;
                     RepairCollision(collisionObject);
                     break;
-                case Enemy _:
+                case Sponge _:
                     Die();
                     break;
                 case Lattice _:
