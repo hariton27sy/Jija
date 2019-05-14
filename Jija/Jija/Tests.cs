@@ -23,7 +23,7 @@ namespace Jija
             var player = new Player(new Point(20, 20), 3);
             var sponge = new Sponge(new Point(20, 20));
             GameObject.ObjectsOnMap = new List<GameObject> { player, sponge };
-            player.Update();
+            player.Update(50);
             Assert.AreEqual(2, player.Health);
         }
     }

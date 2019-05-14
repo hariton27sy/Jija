@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace Jija
 {
+    public static class SizeExtansion
+    {
+        public static SizeF Scale(this SizeF size1, float scale)
+        {
+            return new SizeF(size1.Width * scale, size1.Height * scale);
+        }
+    }
+
     internal class Game
     {
         public const int ObjectsSize = 32;
@@ -69,12 +77,12 @@ namespace Jija
             GameSize = new Size(32 * x, 32 * y);
         }
 
-        public void UpdateState()
+        public void UpdateState(int interval)
         {
-            Player.Update();
+            Player.Update(interval);
             foreach (var obj in objects)
             {
-                obj.Update();
+                obj.Update(interval);
             }
         }
     }

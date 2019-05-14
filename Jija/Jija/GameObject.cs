@@ -9,15 +9,15 @@ namespace Jija
 {
     internal class GameObject
     {
-        public static readonly Size ObjectSize = new Size(Game.ObjectsSize, Game.ObjectsSize);
+        public static readonly SizeF ObjectSize = new Size(Game.ObjectsSize, Game.ObjectsSize);
         public static List<GameObject> ObjectsOnMap { get; set; }
-        private static Size Gravity = new Size(0, 10);
+        private static SizeF Gravity = new Size(0, 10);
         protected bool IsJumped;
 
-        public Point Position { get; set; }
-        public Size Velocity { get; protected set; } = Size.Empty;
+        public PointF Position { get; set; }
+        public SizeF Velocity { get; protected set; } = Size.Empty;
 
-        public GameObject(Point startPosition)
+        public GameObject(PointF startPosition)
         {
             Position = startPosition;
         }
@@ -28,27 +28,58 @@ namespace Jija
             ObjectsOnMap.Remove(this);
         }
 
-        public virtual void Update()
+        public virtual void Update(int interval)
         {
             if (IsJumped)
             {
                 Velocity += Gravity;
             }
-            Position += Velocity;
+            ActIfNoCollision();
+            if ((this is Enemy || this is Player) && !IsJumped)
+            {
+                CheckEmptyDown();
+            }
         }
 
-        public virtual void ActOnCollision()
+        private void CheckEmptyDown()
         {
+            Position += new Size(0, 1);
+            if (GetCollisionObject() != null)
+            {
+                Position -= new Size(0, 1);
+            }
+
+        }
+
+        private void ActIfNoCollision()
+        {
+            var XVelocity = new SizeF(Velocity.Width, 0);
+            var YVelocity = new SizeF(0, Velocity.Height);
+
+            Position += XVelocity;
+            var collision = GetCollisionObject();
+            if (collision != null)
+            {
+                Position -= XVelocity;
+            }
+
+            Position += YVelocity;
+            collision = GetCollisionObject();
+            if (collision != null)
+            {
+                Position -= YVelocity;
+                IsJumped = false;
+            }
 
         }
 
         public virtual GameObject GetCollisionObject()
         {
             var size = new Size(Game.ObjectsSize, Game.ObjectsSize);
-            var thisRect = new Rectangle(Position, size);
+            var thisRect = new RectangleF(Position, size);
             foreach (var obj in ObjectsOnMap)
             {
-                var otherRect = new Rectangle(obj.Position, size);
+                var otherRect = new RectangleF(obj.Position, size);
                 if (thisRect.IntersectsWith(otherRect) && obj != this)
                 {
                     return obj;
@@ -68,7 +99,7 @@ namespace Jija
             var needingY = Math.Abs(upCover) < Math.Abs(downCover) ? upCover : -downCover;
 
             Position += Math.Abs(needingX) < Math.Abs(needingY) || needingY == 0 
-                ? new Size(needingX, 0) : new Size(0, needingY);
+                ? new SizeF(needingX, 0) : new SizeF(0, needingY);
             if (needingY < 0)
             {
                 IsJumped = false;

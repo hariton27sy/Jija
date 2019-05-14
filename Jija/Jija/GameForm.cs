@@ -16,29 +16,34 @@ namespace Jija
 
         public GameForm()
         {
-            DoubleBuffered = true;
             var timer = new Timer();
-            timer.Interval = 100;
+            timer.Interval = 30;
             
             img["player"] = new Bitmap("../../img/player.png");
             img["background"] = new Bitmap("../../img/back.jpg");
             img["wall"] = new Bitmap("../../img/wall.png");
+            Console.WriteLine(img["wall"].Height);
 
             game = new Game("../../Maps/1.txt");
 
             ClientSize = game.GameSize;
             graphics = CreateGraphics();
+            DoubleBuffered = true;
 
             KeyDown += OnKeyDown;
             KeyUp += OnKeyUp;
 
 
+            Console.WriteLine(game.Player.Position);
+
             timer.Tick += (sender, args) =>
             {
-                game.UpdateState();
-                Redraw(graphics);
+                game.UpdateState(timer.Interval);
+                Invalidate();
             };
             timer.Start();
+
+            Paint += Redraw;
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -66,18 +71,18 @@ namespace Jija
             }
         }
         
-        private void Redraw(Graphics graphics)
+        private void Redraw(object sender, PaintEventArgs e)
         {
-            graphics.DrawImage(img["background"], new PointF(0, -90));
-            foreach(var e in game.objects)
+            e.Graphics.DrawImage(img["background"], new PointF(0, -90));
+            foreach(var o in game.objects)
             {
-                switch (e)
+                switch (o)
                 {
                     case Wall _:
-                        graphics.DrawImage(img["wall"], e.Position);
+                        e.Graphics.DrawImage(img["wall"], o.Position);
                         break;
                     case Player _:
-                        graphics.DrawImage(img["player"], e.Position);
+                        e.Graphics.DrawImage(img["player"], o.Position);
                         break;
                 }
             }

@@ -23,14 +23,13 @@ namespace Jija
 
     internal class Bullet : GameObject
     {
-        public Bullet(Point startPosition, int direction) : base(startPosition)
+        public Bullet(PointF startPosition, int direction) : base(startPosition)
         {
             Velocity = new Size(64 * direction, 0);
         }
 
-        public override void ActOnCollision()
+        public void ActOnCollision()
         {
-            base.ActOnCollision();
             var collisionObject = GetCollisionObject();
 
             if (collisionObject is Enemy)

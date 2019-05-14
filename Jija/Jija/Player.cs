@@ -29,24 +29,24 @@ namespace Jija
 
         public void Left()
         {
-            Velocity = new Size(Math.Max(Velocity.Width - 2, -MaxSpeed), Velocity.Height);
+            Velocity = new SizeF(Math.Max(Velocity.Width - 10, -MaxSpeed), Velocity.Height);
         }
 
         public void Right()
         {
-            Velocity = new Size(Math.Min(Velocity.Width + 2, MaxSpeed), Velocity.Height);
+            Velocity = new SizeF(Math.Min(Velocity.Width + 10, MaxSpeed), Velocity.Height);
         }
 
         public void Stop()
         {
-            Velocity = new Size(0, Velocity.Height);
+            Velocity = new SizeF(0, Velocity.Height);
         }
 
         public void Jump()
         {
             if (!IsJumped)
             {
-                Velocity = new Size(Velocity.Width, -JumpingVelocity);
+                Velocity = new SizeF(Velocity.Width, -JumpingVelocity);
                 IsJumped = true;
             }
         }
@@ -60,9 +60,9 @@ namespace Jija
             }
         }
 
-        public override void Update()
+        public override void Update(int interval)
         {
-            base.Update();
+            base.Update(interval);
             ActOnCollision();
         }
 

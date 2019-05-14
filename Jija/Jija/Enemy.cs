@@ -8,7 +8,7 @@ namespace Jija
         {
         }
 
-        public override void ActOnCollision()
+        public void ActOnCollision()
         {
             var collisionObject = GetCollisionObject();
             if (collisionObject is Bonus)
