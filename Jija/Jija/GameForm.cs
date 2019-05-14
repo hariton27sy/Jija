@@ -22,6 +22,7 @@ namespace Jija
             img["player"] = new Bitmap("../../img/player.png");
             img["background"] = new Bitmap("../../img/back.jpg");
             img["wall"] = new Bitmap("../../img/wall.png");
+            img["end"] = new Bitmap("../../img/end.png");
             Console.WriteLine(img["wall"].Height);
 
             game = new Game("../../Maps/1.txt");
@@ -83,6 +84,9 @@ namespace Jija
                         break;
                     case Player _:
                         e.Graphics.DrawImage(img["player"], o.Position);
+                        break;
+                    case End _:
+                        e.Graphics.DrawImage(img["end"], o.Position);
                         break;
                 }
             }
