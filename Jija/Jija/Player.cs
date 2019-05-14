@@ -46,7 +46,7 @@ namespace Jija
         {
             if (!IsJumped)
             {
-                Velocity = new Size(Velocity.Width, JumpingVelocity);
+                Velocity = new Size(Velocity.Width, -JumpingVelocity);
                 IsJumped = true;
             }
         }

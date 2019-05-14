@@ -12,6 +12,8 @@ namespace Jija
     {
         public const int ObjectsSize = 32;
 
+        public Size GameSize { get; private set; }
+
         public Player Player;
         public readonly List<GameObject> objects = new List<GameObject>();
 
@@ -26,9 +28,10 @@ namespace Jija
         private void Load_Map(string filename)
         {
             var y = 0;
+            var x = 0;
             foreach (var line in File.ReadLines(filename))
             {
-                var x = 0;
+                x = 0;
                 foreach (var symbol in line)
                 {
                     var position = new Point(x * ObjectsSize, y * ObjectsSize);
@@ -42,7 +45,7 @@ namespace Jija
                             objects.Add(new Sponge(position));
                             break;
                         case 'w':
-                            objects.Add(null);
+                            objects.Add(new Wall(position));
                             break;
                         case 'e':
                             objects.Add(new End(position));
@@ -62,6 +65,8 @@ namespace Jija
                 }
                 y++;
             }
+
+            GameSize = new Size(32 * x, 32 * y);
         }
 
         public void UpdateState()

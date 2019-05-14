@@ -11,7 +11,7 @@ namespace Jija
     {
         public static readonly Size ObjectSize = new Size(Game.ObjectsSize, Game.ObjectsSize);
         public static List<GameObject> ObjectsOnMap { get; set; }
-        private static Size Gravity = Size.Empty;
+        private static Size Gravity = new Size(0, 10);
         protected bool IsJumped;
 
         public Point Position { get; set; }
@@ -30,9 +30,11 @@ namespace Jija
 
         public virtual void Update()
         {
-            Velocity += Gravity;
+            if (IsJumped)
+            {
+                Velocity += Gravity;
+            }
             Position += Velocity;
-
         }
 
         public virtual void ActOnCollision()
