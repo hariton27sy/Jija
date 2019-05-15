@@ -47,6 +47,10 @@ namespace Jija
 
             timer.Tick += (sender, args) =>
             {
+                if (game.Player.Health == 0)
+                {
+                    Close();
+                }
                 if (game.Player.IsEnd)
                 {
                     try
