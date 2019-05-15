@@ -28,6 +28,10 @@ namespace Jija
             img["end"] = new Bitmap("../../img/end.png");
             img["sponge"] = new Bitmap("../../img/sponge.png");
             img["bullet"] = new Bitmap("../../img/bullet.png");
+            img["hardener"] = new Bitmap("../../img/hardener.png");
+            img["lattice"] = new Bitmap("../../img/lattice.png");
+            img["heart"] = new Bitmap("../../img/hearth.png");
+            img["ammunition"] = new Bitmap("../../img/ammunition.png");
             Console.WriteLine(img["wall"].Height);
 
             game = new Game("../../Maps/3.txt");
@@ -95,7 +99,7 @@ namespace Jija
         private void Redraw(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(img["background"], new PointF(0, -90));
-            e.Graphics.TranslateTransform(-game.Player.Position.X + windowWidthInBlocks * 32 / 2, 0);
+            e.Graphics.TranslateTransform(-game.Player.Position.X + windowWidthInBlocks * 16, 0);
             foreach(var o in game.objects)
             {
                 switch (o)
@@ -115,10 +119,23 @@ namespace Jija
                     case Bullet _:
                         e.Graphics.DrawImage(img["bullet"], o.Position);
                         break;
+                    case Hardener _:
+                        e.Graphics.DrawImage(img["hardener"], o.Position);
+                        break;
+                    case Lattice _:
+                        e.Graphics.DrawImage(img["lattice"], o.Position);
+                        break;
+                    case AdditingLife _:
+                        e.Graphics.DrawImage(img["heart"], o.Position);
+                        break;
+                    case AddingAmmunition _:
+                        e.Graphics.DrawImage(img["ammunition"], o.Position);
+                        break;
                 }
             }
-            e.Graphics.DrawString($"Lives: {game.Player.Health}\nAmmunition: {game.Player.Ammunition}",
-                font, brush, new Point(0, 0));
+            var status = game.Player.IsLiquid ? "Liquid" : "Solid";
+            e.Graphics.DrawString($"Lives: {game.Player.Health}\nAmmunition: {game.Player.Ammunition}\nPlayer Status: {status}",
+                font, brush, new PointF(game.Player.Position.X - windowWidthInBlocks * 16 , 0));
         }
     }
 }

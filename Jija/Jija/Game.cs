@@ -46,6 +46,12 @@ namespace Jija
                     var position = new Point(x * ObjectsSize, y * ObjectsSize);
                     switch (symbol)
                     {
+                        case 'h':
+                            objects.Add(new Hardener(position));
+                            break;
+                        case 't':
+                            objects.Add(new Lattice(position));
+                            break;
                         case 'p':
                             Player = new Player(position, 3);
                             objects.Add(Player);

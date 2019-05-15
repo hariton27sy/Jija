@@ -76,7 +76,7 @@ namespace Jija
 
             Position += YVelocity;
             collision = GetCollisionObject();
-            if (collision is Wall)
+            if (collision is Wall || collision is Lattice && this is Player && !((Player)this).IsLiquid)
             {
                 Position -= YVelocity;
                 IsJumped = false;

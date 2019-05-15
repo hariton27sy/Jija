@@ -11,7 +11,7 @@ namespace Jija
     internal class Player : GameObject
     {
         private const int MaxSpeed = 32;
-        private const int JumpingVelocity = 40;
+        private const int JumpingVelocity = 35;
         public int Health { get; set; }
         public Point LastCheckpoint { get; set; }
         public int Direction;
