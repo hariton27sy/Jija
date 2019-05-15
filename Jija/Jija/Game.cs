@@ -31,6 +31,7 @@ namespace Jija
         {
             GameObject.ObjectsOnMap = objects;
             Load_Map(filePath);
+            GameObject.MapSize = GameSize;
         }
 
         private void Load_Map(string filename)
@@ -67,7 +68,8 @@ namespace Jija
                         case '.':
                             break;
                         default:
-                            throw new ArgumentException("Unresolved symbol in map declaration");
+                            //throw new ArgumentException("Unresolved symbol in map declaration");
+                            break;
                     }
                     x++;
                 }
@@ -84,6 +86,7 @@ namespace Jija
             {
                 obj.Update(interval);
             }
+            GameObject.UpdateDestroyedObjects();
         }
     }
 }

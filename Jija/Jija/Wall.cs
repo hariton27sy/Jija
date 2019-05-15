@@ -25,8 +25,9 @@ namespace Jija
     {
         public Bullet(PointF startPosition, int direction) : base(startPosition)
         {
-            Velocity = new Size(64 * direction, 0);
+            Velocity = new Size(32 * direction, 0);
         }
+
 
         public void ActOnCollision()
         {

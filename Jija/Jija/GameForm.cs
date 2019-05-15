@@ -11,8 +11,11 @@ namespace Jija
     internal class GameForm : Form
     {
         private Game game;
-        private Graphics graphics;
         private Dictionary<string, Bitmap> img = new Dictionary<string, Bitmap>();
+        private readonly Font font = new Font("Courier New", 12);
+        private readonly SolidBrush brush = new SolidBrush(Color.FromArgb(242, 255, 0));
+        private int CurrentLevel = 1;
+        private int windowWidthInBlocks = 10;
 
         public GameForm()
         {
@@ -23,13 +26,14 @@ namespace Jija
             img["background"] = new Bitmap("../../img/back.jpg");
             img["wall"] = new Bitmap("../../img/wall.png");
             img["end"] = new Bitmap("../../img/end.png");
+            img["sponge"] = new Bitmap("../../img/sponge.png");
+            img["bullet"] = new Bitmap("../../img/bullet.png");
             Console.WriteLine(img["wall"].Height);
 
-            game = new Game("../../Maps/1.txt");
-
-            ClientSize = game.GameSize;
-            graphics = CreateGraphics();
+            game = new Game("../../Maps/3.txt");
             DoubleBuffered = true;
+
+            img["background"].SetResolution(20, 50);
 
             KeyDown += OnKeyDown;
             KeyUp += OnKeyUp;
@@ -39,6 +43,19 @@ namespace Jija
 
             timer.Tick += (sender, args) =>
             {
+                if (game.Player.IsEnd)
+                {
+                    try
+                    {
+                        game = new Game($"../../Maps/{CurrentLevel++}.txt");
+                        game.Player.IsEnd = false;
+                        ClientSize = new Size(windowWidthInBlocks * 32, game.GameSize.Height);
+                    }
+                    catch
+                    {
+                        Close();
+                    }
+                }
                 game.UpdateState(timer.Interval);
                 Invalidate();
             };
@@ -54,12 +71,15 @@ namespace Jija
                 case Keys.Space:
                     game.Player.Jump();
                     break;
-
                 case Keys.Left:
                     game.Player.Left();
                     break;
                 case Keys.Right:
                     game.Player.Right();
+                    break;
+                case Keys.ControlKey:
+                    game.Player.Shoot();
+                    Console.WriteLine("HAha");
                     break;
             }
         }
@@ -75,6 +95,7 @@ namespace Jija
         private void Redraw(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(img["background"], new PointF(0, -90));
+            e.Graphics.TranslateTransform(-game.Player.Position.X + windowWidthInBlocks * 32 / 2, 0);
             foreach(var o in game.objects)
             {
                 switch (o)
@@ -88,8 +109,16 @@ namespace Jija
                     case End _:
                         e.Graphics.DrawImage(img["end"], o.Position);
                         break;
+                    case Sponge _:
+                        e.Graphics.DrawImage(img["sponge"], o.Position);
+                        break;
+                    case Bullet _:
+                        e.Graphics.DrawImage(img["bullet"], o.Position);
+                        break;
                 }
             }
+            e.Graphics.DrawString($"Lives: {game.Player.Health}\nAmmunition: {game.Player.Ammunition}",
+                font, brush, new Point(0, 0));
         }
     }
 }

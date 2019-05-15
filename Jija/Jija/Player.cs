@@ -11,12 +11,12 @@ namespace Jija
     internal class Player : GameObject
     {
         private const int MaxSpeed = 32;
-        private const int JumpingVelocity = 48;
+        private const int JumpingVelocity = 40;
         public int Health { get; set; }
         public Point LastCheckpoint { get; set; }
         public int Direction;
         public int Ammunition;
-        public bool IsEnd;
+        public bool IsEnd = true;
         public bool IsLiquid = true;
 
 
@@ -56,7 +56,7 @@ namespace Jija
             if (Ammunition > 0)
             {
                 Ammunition--;
-                ObjectsOnMap.Add(new Bullet(Direction > -1 ? Position + ObjectSize : Position, Direction));
+                ObjectsOnMap.Add(new Bullet(Direction > -1 ? Position + new Size(33, 0) : Position + new Size(0,16), Direction));
             }
         }
 
@@ -64,6 +64,10 @@ namespace Jija
         {
             base.Update(interval);
             ActOnCollision();
+            if (Position.Y > MapSize.Height)
+            {
+                Die();
+            }
         }
 
         public void ActOnCollision()
@@ -84,6 +88,10 @@ namespace Jija
                         Velocity = Size.Empty;
                         RepairCollision(collisionObject);
                     }
+                    break;
+                case Bonus _:
+                    ((Bonus)collisionObject).BonusAction(this);
+                    collisionObject.DestroyObject();
                     break;
             }
         }

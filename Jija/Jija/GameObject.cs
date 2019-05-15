@@ -11,8 +11,10 @@ namespace Jija
     {
         public static readonly SizeF ObjectSize = new Size(Game.ObjectsSize, Game.ObjectsSize);
         public static List<GameObject> ObjectsOnMap { get; set; }
-        private static SizeF Gravity = new Size(0, 10);
+        public static Size MapSize;
+        private static SizeF Gravity = new Size(0, 5);
         protected bool IsJumped;
+        protected static List<GameObject> destroyedObjects = new List<GameObject>();
 
         public PointF Position { get; set; }
         public SizeF Velocity { get; protected set; } = Size.Empty;
@@ -25,7 +27,16 @@ namespace Jija
         public void DestroyObject()
         {
             //что-то еще возможно
-            ObjectsOnMap.Remove(this);
+            destroyedObjects.Add(this);
+        }
+
+        public static void UpdateDestroyedObjects()
+        {
+            foreach(var e in destroyedObjects)
+            {
+                ObjectsOnMap.Remove(e);
+            }
+            destroyedObjects.Clear();
         }
 
         public virtual void Update(int interval)
@@ -58,17 +69,18 @@ namespace Jija
 
             Position += XVelocity;
             var collision = GetCollisionObject();
-            if (collision != null)
+            if (collision is Wall)
             {
                 Position -= XVelocity;
             }
 
             Position += YVelocity;
             collision = GetCollisionObject();
-            if (collision != null)
+            if (collision is Wall)
             {
                 Position -= YVelocity;
                 IsJumped = false;
+                Velocity = XVelocity;
             }
 
         }
